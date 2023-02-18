@@ -1,8 +1,8 @@
 import math
 import random
 import time
-
 UNIX_TIME = math.ceil(int(time.time()))
+
 class Orderbook:
   def __init__(self):
     self.UNIX_TIME = math.ceil(int(time.time()))
@@ -104,6 +104,16 @@ class Orderbook:
   def get_orderbook(self):
     orderbook = {'BIDS': self.bid_side, 'ASKS':self.ask_side}
     return orderbook
+  def get_midprice(self):
+    return (self.bid_side[0]['PRICE'] + self.ask_side[0]['PRICE'])/2
+  def get_best_bid(self):
+    return self.bid_side[0]['PRICE']
+  def get_best_bid_quantity(self):
+    return self.bid_side[0]['QUANTITY']
+  def get_best_ask(self):
+    return self.ask_side[0]['PRICE']
+  def get_best_ask_quantity(self):
+    return self.ask_side[0]['QUANTITY']
  
 
 
@@ -115,8 +125,10 @@ def main():
   OB.add_new_order(new_order)
   print('TRADE:',OB.get_trades())
   print(OB.get_orderbook())
+  print(OB.get_midprice())
 
   
 
 if __name__ == "__main__":
   main()
+  
